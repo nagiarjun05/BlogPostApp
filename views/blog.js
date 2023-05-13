@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded',(e)=>{
     console.log("content loading")
     if(blogId!=undefined) {
         document.getElementById('blog-editing').style.display='none';
-        getBLogDetail(blogId)
+        getBlogDetail(blogId)
     }else if(authId!=undefined){
         document.getElementById('blog-editing').style.display='none';
         const page=1;  
@@ -41,7 +41,7 @@ blogpost.addEventListener('click',async (e)=>{
             url:`http://localhost:8080/blog/postblog`,
             data:{
                 title: Title,
-                content: Content,
+                content: Content
             },
             headers:{'Authorization':token}
             }
@@ -62,7 +62,7 @@ blogpost.addEventListener('click',async (e)=>{
 });
 
 
-const getBLogDetail=function(blogId){
+const getBlogDetail=function(blogId){
     axios({
         method:'get',
         url: `http://localhost:8080/blog/getblog?blogId=${blogId}`,

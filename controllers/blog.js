@@ -44,7 +44,7 @@ const getBlogDetail=async function(req,res){
 const getAuthorBlogs=async function(req,res){
     try{
         const page= +req.query.page || 1;
-        const id=req.query.authId;
+        const id=req.query.authId || req.user.id;
         const user=await User.findByPk(id)
         const totalCount = await Blog.count({where:{userId:id}})
         const Blogs=await Blog.findAll({
@@ -74,9 +74,44 @@ const getAuthorBlogs=async function(req,res){
     }
 };
 
+const deleteBlog=async function(req,res){
+    try{
+        const id=req.query.blogId
+        const blog=await Blog.destroy({where:{id:id}})
+        if(blog){
+            return res.status(200).json({blog:blog,message: 'Your Blog has succefully deleted!!'})
+        }
+    }
+    catch(err){
+        res.status(500).json({
+            message: "Unable to delete Blog..."
+        })
+    }
+};
+
+const editBlog=async function(req,res){
+    try{
+        const {title,content,blogId}=req.body
+        console.log(blogId)
+
+        const blog=await Blog.update({title:title,content:content,author:req.user.name,userId:req.user.id},{where:{id:blogId}})
+
+        if(blog){
+            return res.status(200).json({blog:blog,message: 'Your Blog has succefully updated!!'})
+        }
+    }
+    catch(err){
+        console.log(err)
+        res.status(500).json({
+            message: "Unable to update Blog Details..."
+        })
+    }
+};
 
 module.exports={
     postBlog,
     getBlogDetail,
-    getAuthorBlogs
+    getAuthorBlogs,
+    deleteBlog,
+    editBlog
 }

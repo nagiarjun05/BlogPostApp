@@ -87,6 +87,8 @@ parent_element.addEventListener('click',(e)=>{
 createBlog.addEventListener('click',(e)=>{
     e.preventDefault()
     window.location.href='/blog.html'
+    localStorage.removeItem('authId')
+    localStorage.removeItem('blogId')
 });
 
 account.addEventListener('click',(e)=>{
