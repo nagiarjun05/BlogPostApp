@@ -4,7 +4,6 @@ const home=document.getElementById('home');
 const title=document.getElementById("title");
 const content=document.getElementById("content");
 const blogpost=document.getElementById("blogpost");
-
 const blogId=localStorage.getItem('blogId');
 const token=localStorage.getItem('token');
 

@@ -18,8 +18,8 @@ const signup= async (req, res)=>{
             return res.status(401).json({err:"Invalid username or password"})
         };
 
-        const users= await User.findAll({'email':email })
-        if(users.length>1){
+        const users= await User.findOne({where:{'email':email }})
+        if(users){
             return res.status(403).json({success: false, message: "User Already Exist"});
         };
 
