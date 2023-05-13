@@ -32,6 +32,7 @@ const getBlogs=async function(req,res){
     try{
         const page= +req.query.page || 1;
         const totalCount = await Blog.count();
+        console.log(page)
         const blogs=await Blog.findAll({
             order:[['id','DESC']],
             offset: (page-1)*ITEM_PER_PAGE,

@@ -12,12 +12,14 @@ app.use(cors());
 
 const userRoutes=require('./routes/user');
 const homeRoutes=require('./routes/home');
+const blogRoutes=require('./routes/blog')
 
 // app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyParser.json());
 
 app.use('/user',userRoutes);
 app.use('/home',homeRoutes);
+app.use('/blog',blogRoutes);
 
 
 app.use((req,res)=>{

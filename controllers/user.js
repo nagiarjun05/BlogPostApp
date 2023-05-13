@@ -26,7 +26,7 @@ const signup= async (req, res)=>{
         };
 
         const users= await User.findAll({'email':email })
-        if(users.length>0){
+        if(users.length>1){
             return res.status(403).json({success: false, message: "User Already Exist"});
         };
 
@@ -57,7 +57,7 @@ const login=async (req, res)=>{
                     throw new Error('Something went wrong')
                 }
                 else if(result){
-                    return res.status(200).json({success: true, message: 'User Loged in Succesfully!', token:(generateTokken(users[0]._id,users[0].name))})
+                    return res.status(200).json({success: true, message: 'User Loged in Succesfully!', token:(generateTokken(users[0].id,users[0].name))})
                 }
                 else{
                     return res.status(400).json({success: false, message: 'Password is Inconrrect!'})
